@@ -1,0 +1,65 @@
+# =========================
+# PYTHON
+# =========================
+
+# Bytecode de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Entornos virtuales
+venv/
+env/
+.venv/
+
+# Archivos de entorno (variables sensibles)
+.env
+
+# =========================
+# IDEs / Editores
+# =========================
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# =========================
+# SISTEMA OPERATIVO
+# =========================
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# macOS
+.DS_Store
+
+# =========================
+# LOGS Y TEMPORALES
+# =========================
+
+*.log
+*.tmp
+
+# =========================
+# TESTING / BUILD
+# =========================
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# MODELOS / DATOS (IA)
+# =========================
+
+# Modelos entrenados (si luego usas ML)
+*.pkl
+*.joblib
+models/
+
+# Datasets grandes
+data/
