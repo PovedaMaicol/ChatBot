@@ -2,22 +2,25 @@ import re
 import random
 
 """ 1. ===== CHATBOT SIN LNP ====="""
-
+UMBRAL_CONFIANZA = 0.6
 
 def chatbot():
     print("Bot: Hola, soy un chatbot. Escribe 'salir' para terminar.")
 
     while True:
-        user_input = input("Tú: ").lower()
-        mensaje = limpiar_texto(user_input)
-
-        if mensaje == "salir":
+        user_input = input("Tú: ")
+        
+        if user_input.lower() == "salir":
             print("Bot: ¡Hasta luego!")
             break
         
-        intencion = detectar_intencion(mensaje)
-        respuesta = responder(intencion)
+        intencion, confianza = predecir_con_confianza(user_input)
         
+        if confianza < UMBRAL_CONFIANZA:
+            respuesta = random.choice(respuestas["desconocida"])
+        else:
+            respuesta = responder(intencion)
+            
         print(f"Bot: {respuesta}")
 
 
@@ -100,6 +103,7 @@ modelo.fit(x, etiquetas)
 
 # use model in the chatbot
 def predecir_intencion(texto):
+    texto = limpiar_texto(texto)
     X_test = vectorizer.transform([texto])
     return modelo.predict(X_test)[0]
 
@@ -107,3 +111,25 @@ def predecir_intencion(texto):
 # response to intention
 def responder(intencion):
     return random.choice(respuestas[intencion])
+
+'''VECTORIZACIÓN --> es el proceso de convertir texto en datos numéricos que los modelos de ML pueden entender.'''
+
+'''4. ===== VER QUÉ TAN SEGURO ESTÁ EL MODELO ==== '''
+def predecir_con_confianza(texto):
+    texto = limpiar_texto(texto)
+    X_test = vectorizer.transform([texto])
+    
+    
+    probabilidades = modelo.predict_proba(X_test)[0]
+    ''''predict_proba --> devuelve la probabilidad de cada clase para la entrada dada.'''
+    clases = modelo.classes_
+    
+    
+    mejor_indice = probabilidades.argmax()
+    '''argmax() --> devuelve el índice del valor máximo en una matriz.'''
+    intencion = clases[mejor_indice]
+    confianza = probabilidades[mejor_indice]
+  
+
+    
+    return intencion, confianza
