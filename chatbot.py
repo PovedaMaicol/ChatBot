@@ -1,8 +1,13 @@
 import re
 import random
 
-""" 1. ===== CHATBOT SIN LNP ====="""
+
+
 UMBRAL_CONFIANZA = 0.6
+
+
+""" 1. ===== CHATBOT SIN LNP ====="""
+
 
 def chatbot():
     print("Bot: Hola, soy un chatbot. Escribe 'salir' para terminar.")
@@ -80,7 +85,7 @@ frases = [
     "chao"
 ]
 
-etiquetas = ["saludo", "saludo", "saludo", "nombre", "nombre", "nombre", "despedida", "despedida", "despedida"]
+etiquetas = ["saludo", "saludo", "saludo", "nombre", "nombre", "despedida", "nombre", "despedida", "despedida"]
 
 respuestas = {
     "saludo": ["¡Hola!", "¡Buenos días!", "¡Hey! ¿Cómo estás?"],
@@ -133,3 +138,11 @@ def predecir_con_confianza(texto):
 
     
     return intencion, confianza
+
+
+
+
+
+import pandas as pd
+
+df = pd.read_parquet("hf://datasets/DeepPavlov/snips/intents/intents-00000-of-00001.parquet")
