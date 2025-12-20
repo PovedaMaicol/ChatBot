@@ -48,5 +48,5 @@ print("Accuracy:", accuracy_score(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 
 # 6. Guardar modelo y vectorizador
-# joblib.dump(model, "modelo_intenciones.pkl")
-# joblib.dump(vectorizer, "vectorizer.pkl")
+joblib.dump(model, "modelo_intenciones.pkl")
+joblib.dump(vectorizer, "vectorizer.pkl")
