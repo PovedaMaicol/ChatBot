@@ -97,6 +97,13 @@ def procesar_mensaje(texto, estado, historial):
         respuesta = "🎵 ¿Qué canción quieres agregar?"
         historial.append(("bot", respuesta))
         return respuesta
+    
+    # if intencion == "general":
+    #     respuesta = responder_con_llm(texto, historial)
+    #     return respuesta
+    
+    # return respuesta
+
 
     respuesta = random.choice(RESPUESTAS[intencion])
     historial.append(("bot", respuesta))
