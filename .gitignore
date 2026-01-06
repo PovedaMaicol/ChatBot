@@ -1,65 +1,61 @@
 # =========================
-# PYTHON
+# Python (Backend)
 # =========================
-
-# Bytecode de Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
 
 # Entornos virtuales
 venv/
-env/
-.venv/
+.env/
+.env.local
 
-# Archivos de entorno (variables sensibles)
-.env
+# HuggingFace / Transformers cache
+.cache/
+hf_cache/
+transformers_cache/
+
+# Model checkpoints (si descargas modelos localmente)
+*.bin
+*.pt
+*.ckpt
 
 # =========================
-# IDEs / Editores
+# FastAPI / Uvicorn
 # =========================
+*.log
+
+# =========================
+# Node / Next.js (Frontend)
+# =========================
+node_modules/
+.next/
+out/
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+Thumbs.db
 
 # VS Code
 .vscode/
 
-# PyCharm
-.idea/
-
 # =========================
-# SISTEMA OPERATIVO
+# Testing / Coverage
 # =========================
-
-# Windows
-Thumbs.db
-desktop.ini
-
-# macOS
-.DS_Store
-
-# =========================
-# LOGS Y TEMPORALES
-# =========================
-
-*.log
-*.tmp
-
-# =========================
-# TESTING / BUILD
-# =========================
-
-.pytest_cache/
 .coverage
 htmlcov/
 
 # =========================
-# MODELOS / DATOS (IA)
+# Misc
 # =========================
-
-# Modelos entrenados (si luego usas ML)
-*.pkl
-*.joblib
-models/
-
-# Datasets grandes
-data/
+*.tmp
+*.swp

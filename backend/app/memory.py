@@ -1,4 +1,3 @@
-# app/memory.py
 sessions = {}
 
 def get_memory(session_id: str):

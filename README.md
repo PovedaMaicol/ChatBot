@@ -1,166 +1,156 @@
-# 🤖 Chatbot en Python – Aprendiendo Inteligencia Artificial
+# 🧠 English Tutor AI – Full Stack Chatbot
 
-Este proyecto es un **chatbot básico desarrollado en Python** con fines **educativos**. El objetivo principal es **aprender los fundamentos de la Inteligencia Artificial (IA)**, específicamente cómo funcionan internamente los chatbots, empezando desde reglas simples hasta conceptos básicos de **Procesamiento de Lenguaje Natural (NLP)** y **Machine Learning**.
+Un chatbot tutor de inglés construido con **FastAPI + Transformers en el backend y Next.js en el frontend.**
+El tutor puede recordar información básica del estudiante (como su nombre o país) durante la conversación y responder siempre en inglés.
 
-> ⚠️ Este proyecto **NO usa modelos tipo ChatGPT** ni APIs externas. Está diseñado para **entender la base real** de la IA paso a paso.
+Este proyecto está pensado como portafolio profesional, siguiendo buenas prácticas de arquitectura y separación de responsabilidades.
 
----
+## 🚀 Demo (local)
 
-## 🎯 Objetivo del proyecto
+* Backend: http://localhost:8000
 
-* Aprender cómo se estructura un chatbot
-* Entender cómo Python procesa texto
-* Aplicar conceptos básicos de NLP
-* Preparar el camino para Machine Learning y modelos más avanzados
+* Swagger UI: http://localhost:8000/docs
 
----
+* Frontend: http://localhost:3000
 
-## 🧠 Ramas de la Inteligencia Artificial usadas
-
-* **IA simbólica** → reglas (`if / else`)
-* **Procesamiento de Lenguaje Natural (NLP)** → limpieza y normalización de texto
-* **Preprocesamiento de datos** → preparación del texto para IA
-
-> En futuras versiones se añadirá **Machine Learning supervisado**.
-
----
-
-## 📁 Estructura del proyecto
-
-```
-ChatBot/
+# 🏗️ Arquitectura (Monorepo)
+chatbot/
 │
-├── chatbot.py        # Lógica principal del chatbot
-├── .gitignore        # Archivos ignorados por Git
-├── README.md         # Documentación del proyecto
-```
+├── backend/
+│   ├── app/
+│   │   ├── main.py        # FastAPI entrypoint
+│   │   ├── tutor.py       # Core logic (prompt + model)
+│   │   ├── memory.py      # Session memory handling
+│   │   ├── schemas.py     # Pydantic models
+│   │
+│   ├── requirements.txt
+│   └── README.md
+│
+├── frontend/
+│   ├── app/
+│   │   └── page.tsx       # Chat UI (Next.js App Router)
+│   ├── package.json
+│   └── README.md
+│
+└── README.md              # (este archivo)
 
----
+# 🧠 Características principales
 
-## 🚀 Requisitos
+✅ Tutor de inglés basado en FLAN-T5
 
-* Python 3.10 o superior
-* VS Code (recomendado)
-* Consola / Terminal
+✅ Respuestas siempre en inglés
 
----
+✅ Corrección breve de errores gramaticales
 
-## ▶️ Cómo ejecutar el proyecto
+✅ Memoria simple por sesión (session_id)
 
-### 1️⃣ Clonar el repositorio
+✅ API REST con FastAPI
 
-```bash
-git clone <URL_DEL_REPOSITORIO>
-cd ChatBot
-```
+✅ UI moderna con Next.js + Tailwind
 
----
+✅ Arquitectura escalable (lista para DB / auth)
 
-### 2️⃣ Entrar al intérprete de Python
+# 🧩 Backend – FastAPI
+**Tecnologías**
 
-Desde la carpeta del proyecto:
+Python
 
-```bash
-python
-```
+FastAPI
 
-Verás:
+HuggingFace Transformers
 
-```
->>>
-```
+Pydantic
 
----
+Uvicorn
 
-### 3️⃣ Importar el módulo
+**Instalación**
+cd backend
+python -m venv venv
+source venv/bin/activate   # Windows: venv\Scripts\activate
+pip install -r requirements.txt
 
-```python
-import chatbot
-```
+**Ejecutar servidor**
+uvicorn app.main:app --reload
 
----
+Endpoint principal
 
-### 4️⃣ Ejecutar funciones manualmente
+POST /chat
 
-#### Limpiar texto (NLP básico)
+Request
+{
+  "message": "my name is maicol",
+  "session_id": "uuid"
+}
 
-```python
-chatbot.limpiar_texto("Hola!!! 🤖 2025")
-```
+Response
+{
+  "reply": "Nice to meet you, Maicol!",
+  "memory": {
+    "name": "Maicol",
+    "country": null
+  }
+}
 
-Resultado:
+# 🎨 Frontend – Next.js
+**Tecnologías**
 
-```python
-'hola '
-```
+Next.js (App Router)
 
----
+TypeScript
 
-#### Iniciar el chatbot
+Tailwind CSS
 
-```python
-chatbot.chatbot()
-```
+Fetch API
 
----
+**Instalación**
+cd frontend
+npm install
+npm run dev
 
-### 5️⃣ Salir del intérprete
+**Funcionalidades**
 
-```python
-exit()
-```
+Chat en tiempo real
 
----
+Persistencia de sesión con localStorage
 
-## 🧪 Ejemplo de conversación
+Indicador de escritura
 
-```
-Tú: hola
-Bot: ¡Hola! ¿Cómo estás?
+UI limpia y responsive
 
-Tú: cual es tu nombre
-Bot: Aún no tengo nombre 😄
+🧠 Memoria de sesión
 
-Tú: salir
-Bot: ¡Hasta luego!
-```
+Cada usuario recibe un session_id único que se guarda en el navegador.
+Esto permite que el tutor recuerde información básica durante la conversación.
 
----
+En el futuro, esta memoria puede migrarse fácilmente a:
 
-## 🧩 Conceptos aprendidos hasta ahora
+Base de datos
 
-* Uso del intérprete de Python
-* Importación de módulos
-* Ejecución selectiva de funciones
-* Limpieza de texto con `re`
-* Flujo básico de un sistema conversacional
+Redis
 
----
+Autenticación por usuario
 
-## 🔮 Próximos pasos
+🔮 Próximas mejoras
 
-* Detección de intenciones
-* Tokenización de texto
-* Machine Learning con `scikit-learn`
-* Entrenamiento de un modelo
-* Interfaz de línea de comandos (CLI)
-* Interfaz web
+🔐 Autenticación de usuarios
 
----
+🗄️ Persistencia en base de datos
 
-## 📚 Motivación
+⚡ Streaming de respuestas
 
-Este proyecto forma parte de un proceso personal de **especialización en desarrollo e Inteligencia Artificial**, siguiendo una filosofía de aprendizaje profundo:
+🌍 Deploy (Vercel + Railway / Render)
 
-> *"Primero entender cómo funciona, luego automatizar."*
+🧠 Mejora de prompts y fine-tuning
 
----
+👨‍💻 Autor
 
-## 🧑‍💻 Autor
+Maicol Salazar
+Full Stack Developer
 
-**Maicol Salazar**
-Aprendiendo Inteligencia Artificial y Desarrollo Web 🚀
+GitHub: https://github.com/PovedaMaicol
 
----
+Proyecto pensado como parte de portafolio profesional
 
-Si estás aprendiendo Python o IA, siéntete libre de clonar el proyecto y experimentar 💡
+📄 Licencia
+
+MIT License
