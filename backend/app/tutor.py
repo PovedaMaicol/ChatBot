@@ -1,6 +1,7 @@
+import torch
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-MODEL_NAME = "google/flan-t5-base"
+MODEL_NAME = "google/flan-t5-small"
 TUTOR_NAME = "Neo"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
@@ -29,7 +30,7 @@ def tutor_reply(user_input: str, memory: dict) -> str:
     if lower_input in ["what is my name?", "what's my name?"] and memory["name"]:
         return f"Your name is {memory['name']}."
 
-    # Prompt EXACTO como el que funciona
+    # Prompt EXACTO
     prompt = (
         "You are an AI English tutor.\n"
         "Always answer in English.\n"
@@ -43,19 +44,16 @@ def tutor_reply(user_input: str, memory: dict) -> str:
     if memory["country"]:
         prompt += f"The student is from {memory['country']}.\n"
 
-    prompt += (
-    f"\nStudent: {user_input}\n"
-    "Tutor: Answer naturally and helpfully.\n"
-)
-
+    prompt += f"\nStudent: {user_input}\n" "Tutor: Answer naturally and helpfully.\n"
 
     inputs = tokenizer(prompt, return_tensors="pt")
 
-    outputs = model.generate(
-        input_ids=inputs["input_ids"],
-        max_new_tokens=80,
-        do_sample=True,
-        top_p=0.9,
-    )
+    with torch.no_grad():
+        outputs = model.generate(
+            input_ids=inputs["input_ids"],
+            max_new_tokens=80,
+            do_sample=True,
+            top_p=0.9,
+        )
 
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
