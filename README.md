@@ -64,12 +64,14 @@ Pydantic
 Uvicorn
 
 **Instalación**
+
 cd backend
 python -m venv venv
 source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
 **Ejecutar servidor**
+
 uvicorn app.main:app --reload
 
 Endpoint principal

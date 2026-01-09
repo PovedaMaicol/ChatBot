@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 # ==============================
 # 1. Cargar modelo y tokenizer
 # ==============================
-MODEL_NAME = "google/flan-t5-base"
+MODEL_NAME = "google/flan-t5-small"
 TUTOR_NAME = "Neo"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
