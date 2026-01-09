@@ -88,12 +88,20 @@ while True:
     # ==============================
     inputs = tokenizer(prompt, return_tensors="pt")
 
+    # outputs = model.generate(
+    #     input_ids=inputs["input_ids"],
+    #     max_new_tokens=80,
+    #     do_sample=True,
+    #     top_p=0.9,
+    # )
+    with torch.no_grad():
     outputs = model.generate(
         input_ids=inputs["input_ids"],
         max_new_tokens=80,
         do_sample=True,
         top_p=0.9,
     )
+
 
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
