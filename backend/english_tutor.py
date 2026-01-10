@@ -5,7 +5,7 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 # ==============================
 # 1. Cargar modelo y tokenizer
 # ==============================
-MODEL_NAME = "google/flan-t5-small"
+MODEL_NAME = "google/flan-t5-base"
 TUTOR_NAME = "Neo"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
@@ -89,12 +89,6 @@ while True:
     # ==============================
     inputs = tokenizer(prompt, return_tensors="pt")
 
-    # outputs = model.generate(
-    #     input_ids=inputs["input_ids"],
-    #     max_new_tokens=80,
-    #     do_sample=True,
-    #     top_p=0.9,
-    # )
     with torch.no_grad():
         outputs = model.generate(
             input_ids=inputs["input_ids"],
