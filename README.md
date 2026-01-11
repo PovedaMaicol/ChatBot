@@ -14,6 +14,7 @@ Este proyecto está pensado como portafolio profesional, siguiendo buenas práct
 * Frontend: http://localhost:3000
 
 # 🏗️ Arquitectura (Monorepo)
+```
 chatbot/
 │
 ├── backend/
@@ -33,6 +34,7 @@ chatbot/
 │   └── README.md
 │
 └── README.md              # (este archivo)
+```
 
 # 🧠 Características principales
 
@@ -76,8 +78,9 @@ uvicorn app.main:app --reload
 
 Endpoint principal
 
-POST /chat
+**POST /chat**
 
+```
 Request
 {
   "message": "my name is maicol",
@@ -92,6 +95,7 @@ Response
     "country": null
   }
 }
+```
 
 # 🎨 Frontend – Next.js
 **Tecnologías**
@@ -119,7 +123,7 @@ Indicador de escritura
 
 UI limpia y responsive
 
-🧠 Memoria de sesión
+# 🧠 Memoria de sesión
 
 Cada usuario recibe un session_id único que se guarda en el navegador.
 Esto permite que el tutor recuerde información básica durante la conversación.
